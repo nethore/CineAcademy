@@ -22,7 +22,11 @@ class DirectorController extends Controller
     return view('director/update');
   }
 
-  public function remove() {
-    return view('director/remove');
+  public function remove($id) {
+
+    $director = Directors::find($id);
+    $director->delete();
+
+    return redirect()->back();
   }
 }

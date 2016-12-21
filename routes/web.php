@@ -31,25 +31,28 @@ Route::get('/legal', function () {
     return view('legal');
 });
 
+Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
+
 Route::group(['prefix' => 'movie'], function () {
   Route::get('/index', 'MovieController@index')->name('indexMovie');
   Route::get('/update', 'MovieController@update')->name('updateMovie');
   Route::get('/create', 'MovieController@create')->name('createMovie');
   Route::get('/remove/{id}', 'MovieController@remove')->name('removeMovie');
+  Route::get('/show/{id}', 'MovieController@show')->name('showMovie');
 });
 
 Route::group(['prefix' => 'actor'], function () {
   Route::get('/index', 'ActorController@index')->name('indexActor');
   Route::get('/update', 'ActorController@update')->name('updateActor');
   Route::get('/create', 'ActorController@create')->name('createActor');
-  Route::get('/remove', 'ActorController@remove')->name('removeActor');
+  Route::get('/remove/{id}', 'ActorController@remove')->name('removeActor');
 });
 
 Route::group(['prefix' => 'director'], function () {
   Route::get('/index', 'DirectorController@index')->name('indexDirector');
   Route::get('/update', 'DirectorController@update')->name('updateDirector');
   Route::get('/create', 'DirectorController@create')->name('createDirector');
-  Route::get('/remove', 'DirectorController@remove')->name('removeDirector');
+  Route::get('/remove/{id}', 'DirectorController@remove')->name('removeDirector');
 });
 
 Route::group(['prefix' => 'categories'], function () {

@@ -58,6 +58,7 @@
               <th class="">Nom</th>
               <th class="">Date de naissance</th>
               <th class="">Biographie</th>
+              <th class="">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -74,6 +75,11 @@
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#bio{{ $director['id'] }}">
                   Biographie
                 </button>
+              </td>
+              <td>
+                <a href="{{ route('removeDirector', ['id' => $director['id']]) }}" class="btn btn-danger btn-xs">
+                  Supprimer
+                </a>
               </td>
             </tr>
             @endforeach

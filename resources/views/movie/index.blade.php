@@ -1,12 +1,11 @@
 @extends('layout')
 
 @section('title')
-  CinéAcademy - Liste des films
+  @parent - Liste des films
 @endsection
 
 @section('js')
   @parent
-
 @endsection
 
 @section('content')
@@ -31,36 +30,10 @@
   </header>
   <!-- End: Topbar -->
 
-  @foreach($movies as $movie)
-    <div class="modal fade" id="ba{{ $movie['id'] }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Bande annonce</h4>
-          </div>
-          <div class="modal-body">
-            {!! $movie['trailer'] !!}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="synopsis{{ $movie['id'] }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Synopsis</h4>
-          </div>
-          <div class="modal-body">
-            {!! $movie['synopsis'] !!}
-          </div>
-        </div>
-      </div>
-    </div>
-  @endforeach
+    <section id="content">
 
-  <section id="content" class="table-layout animated fadeIn">
+    <div class="table-layout animated fadeIn">
+
     <div class="panel">
     <div class="panel-body pn">
       <div class="table-responsive">
@@ -74,7 +47,6 @@
               <th class="">Type</th>
               <th class="">Catégorie</th>
               <th class="">Budget</th>
-              <th class="">Bande annonce</th>
               <th class="">Actions</th>
             </tr>
           </thead>
@@ -83,25 +55,34 @@
             <tr>
               <td class="w100">
                 <a class="fancybox" rel="group" href="{{ $movie['image'] }}">
-                  <img class="img-responsive mw40 ib mr10" title="{{ $movie['title'] }}" src="{{ $movie['image'] }}">
+                  <img class="img-responsive mw40 ib mr10 shadow" title="{{ $movie['title'] }}" src="{{ $movie['image'] }}">
                 </a>
               </td>
-              <td class=""><a href="#" data-toggle="modal" data-target="#synopsis{{ $movie['id'] }}">{{ $movie['title'] }}</td>
-              <td class="">{!! str_repeat('<i class="fa fa-star" aria-hidden="true"></i>', $movie['note_presse']) !!}</td>
+              <td class=""><a href="{{ route('showMovie', ['id' => $movie['id']]) }}">{{ $movie['title'] }}</td>
+              <td class="">
+                {!! str_repeat('<i style="color:#F5B025;" class="fa fa-star" aria-hidden="true"></i> ', $movie['note_presse']) !!}
+                {!! str_repeat('<i style="color:#e2e2e2;" class="fa fa-star" aria-hidden="true"></i> ', 5-$movie['note_presse']) !!}
+              </td>
               <td class="">{{ $movie['annee'] }}</td>
               <td class="">{{ $movie['type'] }}</td>
               <td class="">{{ $movie->categories->title }}</td>
-              <td class="align-right">{{ $movie['budget'] }} $</td>
-              <td>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ba{{ $movie['id'] }}">
-                  Voir la BA
-                </button>
+              <td class="align-right">
+                @if($movie['budget'] > 0)
+                {{ $movie['budget'] }} $
+                @else
+                  Non renseigné
+                @endif
               </td>
-              <td>
-                <a href="{{ route('removeMovie', [
-                  'id' => $movie['id']]) }}" class="btn btn-danger btn-xs">
-                  Supprimer
-                </button>
+              <td class="text-center">
+                <a href="{{ route('showMovie', ['id' => $movie['id']]) }}" class="btn btn-info btn-md">
+                  <i style="font-size:1.5rem;" class="fa fa-eye" aria-hidden="true"></i>
+                </a>
+                <a href="{{ route('showMovie', ['id' => $movie['id']]) }}" class="btn btn-success btn-md">
+                  <i style="font-size:1.5rem;" class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a href="{{ route('removeMovie', ['id' => $movie['id']]) }}" class="btn btn-danger btn-md">
+                  <i style="font-size:1.5rem;" class="fa fa-trash" aria-hidden="true"></i>
+                </a>
               </td>
             </tr>
             @endforeach
@@ -111,6 +92,8 @@
     </div>
   </div>
 </div>
+</div>
+
 </section>
 
 @endsection

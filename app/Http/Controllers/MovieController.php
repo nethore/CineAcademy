@@ -15,6 +15,14 @@ class MovieController extends Controller
       ]);
     }
 
+    public function show($id) {
+      $movie = Movies::find($id);
+
+      return view('movie/show', [
+        'movie' => $movie
+      ]);
+    }
+
     public function create() {
       return view('movie/create');
     }

@@ -25,6 +25,11 @@ class ActorController extends Controller
     return view('actor/update');
   }
 
-  public function remove() {
-    return view('actor/remove');
-  }}
+  public function remove($id) {
+
+    $actor = Actors::find($id);
+    $actor->delete();
+
+    return redirect()->back();
+  }
+}

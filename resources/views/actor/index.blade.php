@@ -5,6 +5,10 @@
 
 @endsection
 
+@section('title')
+  @parent - Liste des acteurs
+@endsection
+
 @section('content')
   <!-- Start: Topbar -->
   <header id="topbar" class="alt">
@@ -57,6 +61,7 @@
               <th class="">Ville</th>
               <th class="">Nationalité</th>
               <th class="">Biographie</th>
+              <th class="">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -76,6 +81,11 @@
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#bio{{ $actor['id'] }}">
                   Biographie
                 </button>
+              </td>
+              <td>
+                <a href="{{ route('removeActor', ['id' => $actor['id']]) }}" class="btn btn-danger btn-xs">
+                  Supprimer
+                </a>
               </td>
             </tr>
             @endforeach
