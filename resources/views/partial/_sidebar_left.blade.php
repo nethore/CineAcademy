@@ -74,8 +74,8 @@
     <!-- Start: Sidebar Menu -->
     <ul class="nav sidebar-menu">
       <li class="sidebar-label pt20">Dashboard</li>
-      <li>
-        <a href="/">
+      <li class="{{ Route::currentRouteName() === 'accueil' ? 'active' : '' }}">
+        <a href="{{ route('accueil') }}">
           <span class="glyphicon glyphicon-home"></span>
           <span class="sidebar-title">Accueil</span>
         </a>

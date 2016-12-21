@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/about', function () {
     return view('about');
 });
@@ -32,6 +28,8 @@ Route::get('/legal', function () {
 });
 
 Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
+
+Route::get('/', 'PagesController@accueil')->name('accueil');
 
 Route::group(['prefix' => 'movie'], function () {
   Route::get('/index', 'MovieController@index')->name('indexMovie');

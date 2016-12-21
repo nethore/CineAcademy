@@ -38,6 +38,14 @@ class Movies extends Model
               ->avg('duree');
   }
 
+  public static function getLastFilms()
+  {
+    return DB::table('movies')
+              ->orderBy('date_release', 'desc')
+              ->take(6)
+              ->get();
+  }
+
   public function categories()
   {
       return $this->belongsTo('App\Categories');

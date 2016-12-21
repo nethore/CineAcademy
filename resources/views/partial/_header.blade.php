@@ -1,7 +1,7 @@
 <!-- Start: Header -->
 <header class="navbar navbar-fixed-top navbar-shadow bg-warning">
   <div class="navbar-branding dark bg-warning">
-    <a class="navbar-brand" href="dashboard.html">
+    <a class="navbar-brand" href="{{ route('accueil') }}">
       <img src="{{ asset('img/Ticket-30.png') }}">
       <b>Ciné</b>Academy
     </a>
